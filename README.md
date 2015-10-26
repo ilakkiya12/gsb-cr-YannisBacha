@@ -1,6 +1,6 @@
 # GSB-CR
 
-Application Web GSB pour gérer les compte-rendus de visite
+Application Web GSB de gestion des comptes-rendus de visite.
 
 ## Consignes d'installation
 
@@ -24,7 +24,7 @@ Application Web GSB pour gérer les compte-rendus de visite
     3. `insert_content.sql`
     4. `crt_constraints.sql`
 
-* Testez l'application à l'URL http://gsb-cr.
+* Tester l'application à l'URL http://gsb-cr.
 
 
 
