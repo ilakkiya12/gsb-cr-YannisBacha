@@ -30,6 +30,16 @@
                             </ul>
                         </li>
                     </ul>
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown {% if praticienMenu is defined %}active{% endif %}">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown">Praticiens <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ path('praticiens') }}">Consulter</a></li>
+                                <li><a href="{{ path('praticien_recherche') }}">Rechercher par type</a></li>
+                                <li><a href="{{ path('praticien_rechercheavancee') }}">Rechercher par nom et ville</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
             </div><!-- /.container -->
         </nav>

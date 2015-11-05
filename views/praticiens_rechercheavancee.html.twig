@@ -1,0 +1,29 @@
+{% extends "layout.html.twig" %}
+{% set praticienMenu = true %}
+
+{% block title %}Recherche de praticiens{% endblock %}
+
+{% block content %}
+<h2 class="text-center">{{ block('title') }}</h2>
+<div class="well">
+    <form class="form-horizontal" role="form" action="/praticien/resultats/" method="post">
+        <div class="form-group">
+            <label class="col-sm-4 col-sm-offset-1 control-label">Nom</label>
+            <div class="col-sm-5">
+                    <input class="form-control" type="text" name="nom" >
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 col-sm-offset-1 control-label">Ville</label>
+            <div class="col-sm-5">
+                    <input class="form-control" type="text" name="ville" >
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-3 col-sm-offset-5">
+                <button type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-search"></span> Rechercher</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

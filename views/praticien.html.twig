@@ -1,0 +1,42 @@
+{% extends "layout.html.twig" %}
+{% set praticienMenu = true %}
+
+{% block title %}{{ praticien.prenom }} {{ praticien.nom }}{% endblock %}
+
+{% block content %}
+<h2 class="text-center">{{ block('title') }}</h2>
+<div class="well">
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Type</label>
+            <div class="col-sm-7">
+                <p class="form-control-static">{{ praticien.typePraticien.libelle }}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Adresse</label>
+            <div class="col-sm-7">
+            <p class="form-control-static">{{ praticien.adresse }}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Code postal</label>
+            <div class="col-sm-7">
+                <p class="form-control-static">{{ praticien.cp }}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Ville</label>
+            <div class="col-sm-7">
+                <p class="form-control-static">{{ praticien.ville }}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Coefficient de notoriété</label>
+            <div class="col-sm-7">
+                <p class="form-control-static">{{ praticien.coefNotoriete }}</p>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
