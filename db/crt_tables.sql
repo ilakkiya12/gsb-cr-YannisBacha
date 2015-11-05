@@ -339,7 +339,7 @@ create table visiteur
    ville_visiteur     varchar(100),
    date_embauche      date,
    login_visiteur     varchar(50),
-   pwd_visiteur       varchar(50),
+   pwd_visiteur       varchar(200),
    salt               varchar(23)                    not null,
    role               varchar(100)                   not null,
    type_visiteur      char(1),
