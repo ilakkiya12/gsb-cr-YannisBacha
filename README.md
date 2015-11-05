@@ -4,7 +4,7 @@ Application Web GSB de gestion des comptes-rendus de visite.
 
 ## Consignes d'installation
 
-* Accepter l'invitation Classroom for GitHub pour obtenir le dépôt GitHub `gsb-cr-VotreLogin`.
+* Accepter [l'invitation Classroom for GitHub](https://classroom.github.com/assignment-invitations/222d6a8764c145c279c3f6261d9a4454) pour obtenir le dépôt GitHub `gsb-cr-VotreLogin`.
 * Cloner ce dépôt dans le répertoire de travail du serveur Web (exemple : `c:\xampp\htdocs` avec XAMPP pour Windows).
 * Configurer Apache et le fichier `hosts` pour définir un hôte virtuel `gsb-cr` (ET NON `gsb-cr-VotreNom`) vers ce répertoire. Exemple avec XAMPP sous Windows :
 
