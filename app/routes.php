@@ -58,11 +58,12 @@ $app->get('/praticien/rechercheavancee/', function() use ($app) {
 // Résultats de la recherche de praticiens
 $app->post('/praticien/resultats/', function(Request $request) use ($app) {
     $typePraticienId = $request->request->get('typePraticien');
+    $praticiens = $app['dao.praticien']->findAllByTypePraticien($typePraticienId);
+    if(isset($_POST['nom'])) {
     $nomPraticien = $request->request->get('nom');
     $villePraticien = $request->request->get('ville');
-    if($app['dao.praticien']->findAllByTypePraticien($typePraticienId) != null) 
-        $praticiens = $app['dao.praticien']->findAllByTypePraticien($typePraticienId);
-    else
-        $praticiens = $app['dao.praticien']->findAllByNomVille($nomPraticien,$villePraticien);
+    $praticiens = $app['dao.praticien']->findAllByNomVille($nomPraticien,$villePraticien);
+    }
+    
     return $app['twig']->render('praticiens_resultats.html.twig', array('praticiens' => $praticiens));
 })->bind('praticien_resultats');

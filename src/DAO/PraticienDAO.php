@@ -53,9 +53,23 @@ class PraticienDAO extends DAO
         return $praticiens;
     }
     
+    
+    /**
+     * Renvoie la liste de tous les praticiens avec le nom et la ville
+     *
+     * @param string $nom Nom du praticien
+     * @param string $ville Ville du praticien
+     *
+     * @return array La liste des praticiens
+     */
     public function findAllByNomVille($nom, $ville) {
-        $sql = "select * from praticien where nom_praticien LIKE '%?%' AND ville_praticien LIKE '%?%' order by nom_praticien";
-        $result = $this->getDb()->fetchAll($sql, array($ville,$nom));
+        $sql = "select * from praticien where id_praticien IN 
+        (select id_praticien from praticien where nom_praticien LIKE ?)
+        AND id_praticien IN
+        (select id_praticien from praticien where ville_praticien LIKE ?)
+        order by nom_praticien;";
+        
+        $result = $this->getDb()->fetchAll($sql, array('%'. $nom .'%','%'. $ville .'%'));
         
         // Convertit les résultats de requête en tableau d'objets du domaine
         $praticiens = array();
