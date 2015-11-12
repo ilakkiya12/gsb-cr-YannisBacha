@@ -57,13 +57,32 @@ $app->get('/praticien/rechercheavancee/', function() use ($app) {
 
 // Résultats de la recherche de praticiens
 $app->post('/praticien/resultats/', function(Request $request) use ($app) {
-    $typePraticienId = $request->request->get('typePraticien');
-    $praticiens = $app['dao.praticien']->findAllByTypePraticien($typePraticienId);
-    if(isset($_POST['nom'])) {
-    $nomPraticien = $request->request->get('nom');
-    $villePraticien = $request->request->get('ville');
-    $praticiens = $app['dao.praticien']->findAllByNomVille($nomPraticien,$villePraticien);
+   if($request->request->has('typePraticien')) {
+        $typePraticienId = $request->request->get('typePraticien');
+        $praticiens = $app['dao.praticien']->findAllByTypePraticien($typePraticienId);
     }
-    
+    else {
+        $nomPraticien = $request->request->get('nom');
+        $villePraticien = $request->request->get('ville');
+        $praticiens = $app['dao.praticien']->findAllByNomVille($nomPraticien,$villePraticien);
+           }
     return $app['twig']->render('praticiens_resultats.html.twig', array('praticiens' => $praticiens));
 })->bind('praticien_resultats');
+
+
+
+
+// Login form
+$app->get('/login', function(Request $request) use ($app) {
+    return $app['twig']->render('login.html.twig', array(
+        'error'         => $app['security.last_error']($request),
+        'last_username' => $app['session']->get('_security.last_username'),
+    ));
+})->bind('login');
+
+// Détails sur un praticien
+$app->get('/profil', function() use ($app) {
+    return $app['twig']->render('profil.html.twig');
+})->bind('profil');
+
+

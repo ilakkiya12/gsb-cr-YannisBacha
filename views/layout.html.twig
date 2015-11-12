@@ -40,6 +40,26 @@
                             </ul>
                         </li>
                     </ul>
+                    {% if app.user and is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <ul class="nav navbar-nav pull-right">
+                        <li class="dropdown {% if visiteurMenu is defined %}active{% endif %}">
+                            <a href="" class="dropdown-toggle " data-toggle="dropdown"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Bienvenue, {{ app.user.prenom }} {{ app.user.nom }}<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ path('profil') }}">Profil</a></li>
+                                <li><a href="{{ path('logout') }}">Se déconnecter</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    {% else %}
+                    <ul class="nav navbar-nav pull-right">
+                        <li class="dropdown {% if visiteurMenu is defined %}active{% endif %}">
+                            <a href="" class="dropdown-toggle " data-toggle="dropdown"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Non connecté <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ path('login') }}">Se connecter</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    {% endif %}
                 </div>
             </div><!-- /.container -->
         </nav>
