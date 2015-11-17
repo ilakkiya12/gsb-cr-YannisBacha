@@ -1,6 +1,8 @@
 <?php
 
 use Symfony\Component\HttpFoundation\Request;
+use GSB\domain\Visiteur;
+use GSB\Form\Type\VisiteurType;
 
 // Page d'accueil
 $app->get('/', function () use ($app) {
@@ -80,9 +82,31 @@ $app->get('/login', function(Request $request) use ($app) {
     ));
 })->bind('login');
 
-// Détails sur un praticien
+/* // Détails sur un praticien
 $app->get('/profil', function() use ($app) {
     return $app['twig']->render('profil.html.twig');
+})->bind('profil');
+*/
+
+
+// Article details with visiteurs
+$app->match('/profil', function (Request $request) use ($app) {
+    $visiteurFormView = null;
+    if ($app['security.authorization_checker']->isGranted('IS_AUTHENTICATED_FULLY')) {
+        // A user is fully authenticated : he can add visiteurs
+        $visiteur = new Visiteur();
+        $user = $app['user'];
+        $visiteur = $user;
+        $visiteurForm = $app['form.factory']->create(new visiteurType(), $visiteur);
+        $visiteurForm->handleRequest($request);
+        if ($visiteurForm->isSubmitted() && $visiteurForm->isValid()) {
+            $app['dao.visiteur']->save($visiteur);
+            $app['session']->getFlashBag()->add('success', 'Vos informations personnelles ont été mises à jour. .');
+        }
+        $visiteurFormView = $visiteurForm->createView();
+    }
+    return $app['twig']->render('profil.html.twig',array('visiteur' => $visiteur,
+'visiteurForm' => $visiteurFormView));
 })->bind('profil');
 
 

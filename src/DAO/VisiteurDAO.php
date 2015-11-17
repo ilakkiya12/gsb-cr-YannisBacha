@@ -75,7 +75,7 @@ class VisiteurDAO extends DAO implements UserProviderInterface
         $visiteur->setNom($row['nom_visiteur']);
         $visiteur->setPrenom($row['prenom_visiteur']);
         $visiteur->setAdresse($row['adresse_visiteur']);
-        $visiteur->setCp($row['cp_visiteur']);
+        $visiteur->setCodepostal($row['cp_visiteur']);
         $visiteur->setVille($row['ville_visiteur']);
         $visiteur->setDateEmbauche($row['date_embauche']);
         $visiteur->setUsername($row['login_visiteur']);
@@ -96,7 +96,7 @@ class VisiteurDAO extends DAO implements UserProviderInterface
             'nom_visiteur' => $visiteur->getNom(),
             'prenom_visiteur' => $visiteur->getPrenom(),
             'adresse_visiteur' => $visiteur->getAdresse(),
-            'cp_visiteur' => $visiteur->getCp(),
+            'cp_visiteur' => $visiteur->getCodePostal(),
             'ville_visiteur' => $visiteur->getVille(),
             'date_embauche' => $visiteur->getDateEmbauche(),
             'login_visiteur' => $visiteur->getUsername(),

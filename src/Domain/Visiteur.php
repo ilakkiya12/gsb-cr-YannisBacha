@@ -39,7 +39,7 @@ class Visiteur implements UserInterface
      *
      * @var string
      */
-    private $cp;
+    private $codePostal;
 
     /**
      * Ville.
@@ -116,12 +116,12 @@ class Visiteur implements UserInterface
         $this->adresse = $adresse;
     }
 
-    public function getCp() {
-        return $this->cp;
+    public function getCodePostal() {
+        return $this->codePostal;
     }
 
-    public function setCp($cp) {
-        $this->cp = $cp;
+    public function setCodePostal($codePostal) {
+        $this->codePostal = $codePostal;
     }
 
     public function getVille() {
