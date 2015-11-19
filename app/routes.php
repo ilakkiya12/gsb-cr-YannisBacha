@@ -1,8 +1,10 @@
 <?php
 
 use Symfony\Component\HttpFoundation\Request;
-use GSB\domain\Visiteur;
+use GSB\Domain\Visiteur;
+use GSB\Domain\RapportVisite;
 use GSB\Form\Type\VisiteurType;
+use GSB\Form\Type\RapportType;
 
 // Page d'accueil
 $app->get('/', function () use ($app) {
@@ -116,5 +118,27 @@ $app->get('/rapport/', function() use ($app) {
     $rapports = $app['dao.rapport']->findAllByVisiteur($app['user']->getId());
     return $app['twig']->render('rapports.html.twig', array('rapports' => $rapports));
 })->bind('rapports');
+
+// Rapport de visite
+$app->match('/rapport/ajout', function(Request $request) use ($app) {
+    $rapport = new RapportVisite();
+    $user = $app['user'];
+    $rapport->setVisiteur($user);
+    $praticiens = $app['dao.praticien']->findAll();
+    $rapportFormView = null;
+    $rapportForm = $app['form.factory']->create(new RapportType($praticiens),$rapport);
+    $rapportForm->handleRequest($request);
+    if ($rapportForm->isSubmitted() && $rapportForm->isValid()) {
+         // Ajoute manuellement le praticien au nouveau rapport
+        $praticienId = $rapportVisiteForm->get('praticien')->getData();
+        $praticien = $app['dao.praticien']->find($praticienId);
+        $rapport->setPraticien($praticien);
+        // Sauvegarde le nouveau rapport
+        $app['dao.rapport']->save($rapport);
+        $app['session']->getFlashBag()->add('success', 'Le rapport a été sauvegardé.');
+    }
+    $rapportFormView = $rapportForm->createView();
+    return $app['twig']->render('rapport_ajout.html.twig', array('rapportForm' => $rapportFormView));
+})->bind('ajouter');
 
 

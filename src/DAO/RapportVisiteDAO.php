@@ -37,7 +37,6 @@ class RapportVisiteDAO extends DAO
         foreach ($result as $row) {
             $rapportId = $row['id_rapport'];
             $rapportVisite = $this->buildDomainObject($row);
-
             $rapportVisites[$rapportId] = $rapportVisite;
         }
         return $rapportVisites;
@@ -53,9 +52,11 @@ class RapportVisiteDAO extends DAO
     protected function buildDomainObject($row) {
         $rapportVisite = new RapportVisite();
         $rapportVisite->setId($row['id_rapport']);
-        $rapportVisite->setDateRapport($row['date_rapport']);
+        $dateRapport = \DateTime::createFromFormat('Y-m-d', $row['date_rapport']);
+        $rapportVisite->setDateRapport($dateRapport);
         $rapportVisite->setBilan($row['bilan']);
         $rapportVisite->setMotif($row['motif']);
+        
 
         if (array_key_exists('id_praticien', $row)) {
             // Find and set the associated praticien

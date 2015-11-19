@@ -18,7 +18,7 @@
             </thead>
             {% for rapport in rapports %}
                 <tr>
-                    <td>{{ rapport.dateRapport }}</td>
+                    <td>{{ rapport.dateRapport|date("m/d/Y") }}</td>
                     <td>{{ rapport.praticien.prenom }} {{ rapport.praticien.nom }}</td>
                     <td>{{ rapport.praticien.ville }}</td>
                     <td>{{ rapport.motif }}</td>

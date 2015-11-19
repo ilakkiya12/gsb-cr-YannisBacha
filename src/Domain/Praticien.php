@@ -123,4 +123,8 @@ class Praticien
     public function setTypePraticien(TypePraticien $typePraticien) {
         $this->typePraticien = $typePraticien;
     }
+    
+    public function __toString() {
+        return $this->getPrenom().' '.$this->getNom();    
+    }
 }
