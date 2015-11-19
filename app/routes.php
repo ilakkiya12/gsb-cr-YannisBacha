@@ -89,24 +89,32 @@ $app->get('/profil', function() use ($app) {
 */
 
 
-// Article details with visiteurs
-$app->match('/profil', function (Request $request) use ($app) {
+// Profil utilisateur
+$app->match('/profil', function(Request $request) use ($app) {
+    $visiteur = $app['user'];
     $visiteurFormView = null;
-    if ($app['security.authorization_checker']->isGranted('IS_AUTHENTICATED_FULLY')) {
-        // A user is fully authenticated : he can add visiteurs
-        $visiteur = new Visiteur();
-        $user = $app['user'];
-        $visiteur = $user;
-        $visiteurForm = $app['form.factory']->create(new visiteurType(), $visiteur);
-        $visiteurForm->handleRequest($request);
-        if ($visiteurForm->isSubmitted() && $visiteurForm->isValid()) {
-            $app['dao.visiteur']->save($visiteur);
-            $app['session']->getFlashBag()->add('success', 'Vos informations personnelles ont été mises à jour. .');
-        }
-        $visiteurFormView = $visiteurForm->createView();
+    $visiteurForm = $app['form.factory']->create(new VisiteurType(), $visiteur);
+    $visiteurForm->handleRequest($request);
+    if ($visiteurForm->isSubmitted() && $visiteurForm->isValid()) {
+        $plainPassword = $visiteur->getPassword();
+        // find the encoder for a UserInterface instance
+        $encoder = $app['security.encoder_factory']->getEncoder($visiteur);
+        // compute the encoded password
+        $password = $encoder->encodePassword($plainPassword, $visiteur->getSalt());
+        $visiteur->setPassword($password); 
+        $app['dao.visiteur']->save($visiteur);
+        $app['session']->getFlashBag()->add('success', 'Vos informations personnelles ont été mises à jour.');
     }
-    return $app['twig']->render('profil.html.twig',array('visiteur' => $visiteur,
-'visiteurForm' => $visiteurFormView));
+    $visiteurFormView = $visiteurForm->createView();
+    return $app['twig']->render('profil.html.twig', array('visiteurForm' => $visiteurFormView));
 })->bind('profil');
+
+
+
+// Liste de tous les rapports de visite
+$app->get('/rapport/', function() use ($app) {
+    $rapports = $app['dao.rapport']->findAllByVisiteur($app['user']->getId());
+    return $app['twig']->render('rapports.html.twig', array('rapports' => $rapports));
+})->bind('rapports');
 
 

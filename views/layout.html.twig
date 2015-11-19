@@ -60,6 +60,14 @@
                         </li>
                     </ul>
                     {% endif %}
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown {% if rapportMenu is defined %}active{% endif %}">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown">Rapports de visite <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ path('rapports') }}">Consulter</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
             </div><!-- /.container -->
         </nav>

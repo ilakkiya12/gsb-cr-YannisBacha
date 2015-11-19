@@ -80,11 +80,21 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 col-sm-offset-1 control-label">Mot de passe</label>
-            <div class="col-sm-5 col-md-4 col-md-offset-4">
-                <input type="password" required>
-            </div>
+        <label class="col-sm-3 col-sm-offset-1 control-label">Mot de passe</label>
+        <div class="col-sm-5 col-md-3">
+            {{ form_widget(visiteurForm.password.first, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
         </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 col-sm-offset-1 control-label">Répéter le mot de passe</label>
+        <div class="col-sm-5 col-md-3">
+            {{ form_widget(visiteurForm.password.second, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
         <div class="form-group">
             <div class="col-sm-2 col-sm-offset-4 col-md-4 col-md-offset-4">
                 <input type="submit" class="btn btn-primary" value="Mettre à jour" />
