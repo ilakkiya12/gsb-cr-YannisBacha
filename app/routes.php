@@ -130,7 +130,7 @@ $app->match('/rapport/ajout', function(Request $request) use ($app) {
     $rapportForm->handleRequest($request);
     if ($rapportForm->isSubmitted() && $rapportForm->isValid()) {
          // Ajoute manuellement le praticien au nouveau rapport
-        $praticienId = $rapportVisiteForm->get('praticien')->getData();
+        $praticienId = $rapportForm->get('praticien')->getData();
         $praticien = $app['dao.praticien']->find($praticienId);
         $rapport->setPraticien($praticien);
         // Sauvegarde le nouveau rapport

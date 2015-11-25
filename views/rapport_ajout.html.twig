@@ -9,11 +9,10 @@
     </div>
 {% endfor %}
 <div class="well">
-    <form class=" form-horizontal" role="form" method="post">
 {% if rapportForm %} 
-        {{ form_start(rapportForm) }} 
+    {{ form_start(rapportForm, { 'attr': {'class': 'form-horizontal'} }) }}
         <div class="form-group">
-            <label class="col-sm-3 col-sm-offset-1 control-label">Praticien</label>
+            <label class="col-sm-4 col-sm-offset-1 control-label">Praticien</label>
             <div class="col-sm-5 col-md-4 ">
             {{ form_errors(rapportForm.praticien) }}
                 {{ form_widget(rapportForm.praticien, { 'attr':  {
@@ -22,7 +21,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 col-sm-offset-1 control-label">Date</label>
+            <label class="col-sm-4 col-sm-offset-1 control-label">Date</label>
             <div class="col-sm-5 col-md-4 ">
             {{ form_errors(rapportForm.dateRapport) }}
                 {{ form_widget(rapportForm.dateRapport, { 'attr':  {
@@ -31,29 +30,33 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 col-sm-offset-1 control-label">Motif</label>
+            <label class="col-sm-4 col-sm-offset-1 control-label">Motif</label>
             <div class="col-sm-6 col-md-4 ">
             {{ form_errors(rapportForm.motif) }}
                 {{ form_widget(rapportForm.motif, { 'attr':  {
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'rows' : 4
                 }}) }}
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 col-sm-offset-1 control-label">Bilan</label>
+            <label class="col-sm-4 col-sm-offset-1 control-label">Bilan</label>
             <div class="col-sm-2 col-md-4 ">
             {{ form_errors(rapportForm.bilan) }}
                 {{ form_widget(rapportForm.bilan, { 'attr':  {
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'rows' : 4
                 }}) }}
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-2 col-sm-offset-4 col-md-4 col-md-offset-4">
-                <input type="submit" class="btn btn-primary" value="Ajouter" />
+            <div class="col-sm-offset-4 col-md-offset-5 col-sm-3">
+                {{ form_row(rapportForm.ajouter, { 'attr':  {
+                    'class': 'btn btn-primary'
+                }}) }}
             </div>
         </div>
-    </form>
+    {{ form_end(rapportForm) }}
 </div>
 {% endif %}
 {% endblock %}

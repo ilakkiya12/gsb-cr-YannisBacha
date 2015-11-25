@@ -53,7 +53,8 @@ class RapportVisiteDAO extends DAO
         $rapportVisite = new RapportVisite();
         $rapportVisite->setId($row['id_rapport']);
         $dateRapport = \DateTime::createFromFormat('Y-m-d', $row['date_rapport']);
-        $rapportVisite->setDateRapport($dateRapport);
+        $rapportVisite->setDateRapport($dateRapport->format('Y-m-d'));
+        //$rapportVisite->setDateRapport($row['date_rapport']);
         $rapportVisite->setBilan($row['bilan']);
         $rapportVisite->setMotif($row['motif']);
         
@@ -83,15 +84,10 @@ class RapportVisiteDAO extends DAO
         $rapportVisiteData = array(
             'id_praticien' => $rapportVisite->getPraticien()->getId(),
             'id_visiteur' => $rapportVisite->getVisiteur()->getId(),
-            'date_rapport' => $rapportVisite->getDateRapport(),
+            'date_rapport' => $rapportVisite->getDateRapport()->format('Y-m-d'),
             'bilan' => $rapportVisite->getBilan(),
             'motif' => $rapportVisite->getMotif()
             );
-
-        if ($rapportVisite->getId()) {
-            // The rapportVisite has already been saved : update it
-            $this->getDb()->update('rapport_visite', $rapportVisiteData, array('id_rapport' => $rapportVisite->getId()));
-        } else {
             // The rapportVisite has never been saved : insert it
             $this->getDb()->insert('rapport_visite', $rapportVisiteData);
             // Get the id of the newly created rapportVisite and set it on the entity.
@@ -100,4 +96,3 @@ class RapportVisiteDAO extends DAO
         }
     }
 
-}

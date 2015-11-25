@@ -85,11 +85,6 @@ class VisiteurDAO extends DAO implements UserProviderInterface
         return $visiteur;
     }
     
-     /**
-     * Saves a comment into the database.
-     *
-     * @param \MicroCMS\Domain\Comment $comment The comment to save
-     */
     public function save(Visiteur $visiteur) {
         $visiteurData = array(
             'id_visiteur' => $visiteur->getId(),

@@ -14,7 +14,7 @@ class RapportVisite
     /**
      * Date du rapport.
      *
-     * @var string
+     * @var DateTime
      */
     private $dateRapport;
     
@@ -68,7 +68,8 @@ class RapportVisite
         $this->id = $id;
     }
 
-    public function getDateRapport() {
+    public function getDateRapport()
+    {
         return $this->dateRapport;
     }
 

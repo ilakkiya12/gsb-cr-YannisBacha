@@ -40,6 +40,7 @@ class RapportType extends AbstractType
             ));
         $builder->add('motif','textarea');
         $builder->add('bilan','textarea');
+        $builder->add('ajouter','submit');
     }
 
     public function getName()
